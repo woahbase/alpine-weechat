@@ -1,0 +1,20 @@
+#!/usr/bin/with-contenv bash
+set -e
+
+USERHOMEDIR="$(getent passwd ${S6_USER:-alpine} | cut -d: -f6)";
+
+# ensure conf dirs
+mkdir -p \
+    "${USERHOMEDIR}/.local" \
+    "${USERHOMEDIR}/.weechat" \
+    ;
+
+# fix permissions
+chown ${S6_USER:-alpine}:${S6_USER:-alpine} \
+    "${USERHOMEDIR}" \
+    ;
+
+chown -R ${S6_USER:-alpine}:${S6_USER:-alpine} \
+    "${USERHOMEDIR}/.local" \
+    "${USERHOMEDIR}/.weechat" \
+    ;
