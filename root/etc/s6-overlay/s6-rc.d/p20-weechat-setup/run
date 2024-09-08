@@ -1,20 +1,28 @@
 #!/usr/bin/with-contenv bash
 set -e
 
+vecho () { if [ "${S6_VERBOSITY:-1}" -gt 0 ]; then echo "[$0] $@"; fi; }
+
 USERHOMEDIR="$(getent passwd ${S6_USER:-alpine} | cut -d: -f6)";
 
 # ensure conf dirs
+vecho "Ensure configuration directories exist.";
 mkdir -p \
-    "${USERHOMEDIR}/.local" \
+    "${USERHOMEDIR}/.cache/weechat" \
+    "${USERHOMEDIR}/.config/weechat" \
+    "${USERHOMEDIR}/.local/share/weechat" \
     "${USERHOMEDIR}/.weechat" \
     ;
 
 # fix permissions
+vecho "Fixing permissions.";
 chown ${S6_USER:-alpine}:${S6_USER:-alpine} \
     "${USERHOMEDIR}" \
     ;
 
 chown -R ${S6_USER:-alpine}:${S6_USER:-alpine} \
-    "${USERHOMEDIR}/.local" \
+    "${USERHOMEDIR}/.cache/weechat" \
+    "${USERHOMEDIR}/.config/weechat" \
+    "${USERHOMEDIR}/.local/share/weechat" \
     "${USERHOMEDIR}/.weechat" \
     ;
