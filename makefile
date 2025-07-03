@@ -28,6 +28,8 @@ TESTCMD   := \
 	uname -a; \
 	weechat --version; \
 	#
+
+SKIP_loong64 := 1
 # -- }}}
 
 # {{{ -- flags
