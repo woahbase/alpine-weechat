@@ -15,6 +15,7 @@ RUN set -xe \
         tzdata \
         unzip \
         weechat \
+        weechat-lua \
         weechat-matrix \
         weechat-perl \
         weechat-python \
